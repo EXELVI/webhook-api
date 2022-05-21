@@ -1,5 +1,5 @@
 //By EXELVI#8345
-//For ItzLucio#4917
+//For NTeXploit
 //Before using/copying ask to EXELVI#8345
 //I explained how it works, read comment
 
@@ -8,17 +8,16 @@ var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m,
   webh[key] = value;
 }); //Here we take url arguments (Ex: { token: "0432..." }), you can see it in the console
 
+
 function sendMsg() {
   console.log(webh) //Send to console url arguments
 
-  if (!webh.token && !webh.id) return console.error("No webhook token and id found"); //If it don't find the token and id print an error
-  if (!webh.token) return console.error("No webhook token found"); //If it don't find the token print an error
-  if (!webh.id) return console.error("No webhook id found"); //If it don't find the id print an error
+
 
   var request = new XMLHttpRequest(); //Http request
-  request.open("POST", `https://discordapp.com/api/webhooks/${webh.id}/${webh.token}`);//It open a request to discord with the id and token of the webhook
-
+  request.open("POST", `http://localhost:8080/test/`); //It open a request to discord with the id and token of the webhook
   request.setRequestHeader('Content-type', 'application/json'); //Set the header
+
 
   var params = {
     content: webh.content,
@@ -30,8 +29,8 @@ function sendMsg() {
       "footer": webh.efooter
     }]
   }//The variables for the webhook
-  
-  request.send(JSON.stringify(params)); //Send the request to discord (send the webhook)
+
+  request.send(JSON.stringify(params))
 }
 
-sendMsg() //Starts the function
+sendMsg() //Starts the function 
